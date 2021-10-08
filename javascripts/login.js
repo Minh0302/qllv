@@ -5,7 +5,6 @@ const signinForm = document.querySelector('#form-login');
 const userBar = document.querySelector('#ulUserBar');
 
 const apiLogin = "http://localhost:8120/api/auth/signin";
-
 signinForm.onsubmit = function (event) {
     event.preventDefault();
 }
