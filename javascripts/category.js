@@ -3,6 +3,9 @@ fetch(apiBoMon)
     .then(function(response) {
         return response.json();
     })
+    .catch(function(error) {
+        console.log(error);
+    })
     .then(function(posts) {
         var htmls = posts.map(function(post) {
             return `<li> 
