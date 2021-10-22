@@ -5,6 +5,8 @@ const signinForm = document.querySelector('#form-login');
 const userBar = document.querySelector('#ulUserBar');
 
 const apiLogin = "http://localhost:8120/api/auth/signin";
+var nextUrl;
+
 signinForm.onsubmit = function (event) {
     event.preventDefault();
 }
@@ -29,8 +31,11 @@ function login(callback) {
 }
 
 function handleToken(result) {
-    //nextUrl = response.headers.get("Location");
-    console.log(result);
+
+    if(result.nextUrl!=null){
+        console.log(result.nextUrl);
+        location.href = "./admin/index.html";
+    }
     htmls = `<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"> 
                 <i class="fa fa-user"> ${result.fullname}</i>  
             </a>  
@@ -39,10 +44,8 @@ function handleToken(result) {
                 <li><a href="#">Thoát</a></li>  
             </ul>`;
             
-    let token = result.type +' ' + result.accessToken;
-    localStorage.setItem('accessToken', token);
-    //location.href = url;
-    //console.log(token);
+    let accessToken = result.type +' ' + result.token;
+    localStorage.setItem('accessToken', accessToken);
 
     $('#login').modal('hide');
     userBar.classList.add('dropdown');

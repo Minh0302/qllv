@@ -69,16 +69,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group"></div>
-                        <form>
+                        <form id="form-login">
                             <div class="form-group">
                             </div>
                             <div class="form-group">
                                 <label for="txtLoginName">Tên truy cập</label>
-                                <input class="form-control" placeholder="LoginName" value="">
+                                <input class="form-control" id="username" placeholder="LoginName" value="">
                             </div>
                             <div class="form-group">
                                 <label for="txtPassword">Mật khẩu</label>
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" id="password" class="form-control" placeholder="Password">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-primary">Đăng nhập</button>
+                        <button type="button" id="submit-form" class="btn btn-primary">Đăng nhập</button>
                     </div>
                 </div>
             </div>
@@ -292,6 +292,7 @@
         <!-- Theme JS -->
         <script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="js/custom.js"></script>
+        <script type="text/javascript" src="javascripts/login.js"></script>
     </body>
 
 
