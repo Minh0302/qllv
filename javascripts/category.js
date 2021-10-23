@@ -1,4 +1,4 @@
-const apiBoMon = 'http://localhost:8120/api/bomon';
+const apiBoMon = 'http://localhost:8122/api/bomon';
 fetch(apiBoMon)
     .then(function(response) {
         return response.json();
