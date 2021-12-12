@@ -1,5 +1,5 @@
-const GiaoVienApi = 'http://127.0.0.1:8122/api/giaovien';
-const BoMonApi = 'http://127.0.0.1:8122/api/bomon';
+const GiaoVienApi = 'http://127.0.0.1:8120/api/giaovien';
+const BoMonApi = 'http://127.0.0.1:8120/api/bomon';
 
 function start(){
     getGiaoVien(function (DSGiaoVien){
