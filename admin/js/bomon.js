@@ -1,4 +1,4 @@
-const BoMonApi = 'http://127.0.0.1:8122/api/bomon';
+const BoMonApi = 'http://127.0.0.1:8121/api/bomon';
 
 function start(){
     getCategory(function(DSBoMon){
