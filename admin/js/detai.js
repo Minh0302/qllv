@@ -1,10 +1,9 @@
-const GiaoVienApi = 'http://127.0.0.1:8120/api/giaovien';
+const DeTaiApi = 'http://127.0.0.1:8120/api/detai';
 const BoMonApi = 'http://127.0.0.1:8120/api/bomon';
 
-
 function start(){
-    getGiaoVien(function (DSGiaoVien){
-        renderGiaoVien(DSGiaoVien);
+    getDeTai(function (DSDeTai){
+        renderDeTai(DSDeTai);
     });
     getMaBoMon(function (DSMaBoMon){
         renderMaBoMon(DSMaBoMon);
@@ -12,38 +11,35 @@ function start(){
     getTenBoMon(function(DSTenBoMon){
         renderTenBoMon(DSTenBoMon);
     });
-    handleCreateGiaoVien();
+    handleCreateDeTai();
 }
 start();
 
-function getGiaoVien(callback){
-    fetch(GiaoVienApi)
+function getDeTai(callback){
+    fetch(DeTaiApi)
         .then(function(response){
             return response.json();
         })
         .then(callback)
 }
-function renderGiaoVien(DSGiaoVien){
-    var listGiaoVien = document.querySelector('#list-giaovien');
+function renderDeTai(DSDeTai){
+    var listDeTai = document.querySelector('#list-detai');
     var i = 1;
-    var htmls = DSGiaoVien.map(function (GiaoVien) {
-        return `<tr class="giaovien-${GiaoVien.id}">
+    var htmls = DSDeTai.map(function (DeTai) {
+        return `<tr class="detai-${DeTai.id}">
                     <td>${i++}</td>
-                    <td>${GiaoVien.msgv}</td>
-                    <td>${GiaoVien.username}</td>
-                    <td>${GiaoVien.hoTen}</td>
-                    <td>${GiaoVien.gioitinh}</td>
-                    <td>${GiaoVien.email}</td>
-                    <td>${GiaoVien.ngaysinh}</td>
-                    <td>${GiaoVien.sdt}</td>
-                    <td>${GiaoVien.bomonCode}</td>
-                    <td>${GiaoVien.tenBoMon}</td>
+                    <td>${DeTai.ten}</td>
+                    <td>${DeTai.mucDich}</td>
+                    <td>${DeTai.nhiemVu}</td>
+                    <td>${DeTai.tomTat}</td>
+                    <td>${DeTai.modifiedDate}</td>
+                    <td>${DeTai.createdDate}</td>
                     <td>
                     <a href="" class="active" ui-toggle-class=""><i class="fa fa-eye text-success text-active"></i></a>
-                    <button class="btn" onclick="handleDeleteGiaoVien(${GiaoVien.id})"><i class="fa fa-times text-danger text"></i></button>
+                    <button class="btn" onclick="handleDeleteDeTai(${DeTai.id})"><i class="fa fa-times text-danger text"></i></button>
                 </td>`;
     });
-    listGiaoVien.innerHTML = htmls.join('');
+    listDeTai.innerHTML = htmls.join('');
 }
 
 function getMaBoMon(callback){
@@ -75,58 +71,58 @@ function renderTenBoMon(DSTenBoMon){
     listTenBoMon.innerHTML = htmls.join('');
 }
 
-function createGiaoVien(data,callback){
+function createDeTai(data,callback){
     var options = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data),
     };
-    fetch(GiaoVienApi, options)
+    fetch(DeTaiApi, options)
         .then(function(response){
             return response.json();
         })
         .then(callback)
 }
-function handleCreateGiaoVien(){
-    var createBtnGiaoVien = document.querySelector('#create-giaovien');
+function handleCreateDeTai(){
+    var createBtnDeTai = document.querySelector('#create-detai');
     createBtnGiaoVien.onclick = function(){
-        var msgv = document.querySelector('input[name="msgv"]').value;
-        var username = document.querySelector('input[name="username"]').value;
-        var hoTen = document.querySelector('input[name="hoTen"]').value;
-        var gioitinh = document.querySelector('input[name="gioitinh"]').value;
-        var email = document.querySelector('input[name="email"]').value;
-        var ngaysinh = document.querySelector('input[name="ngaysinh"]').value;
-        var sdt = document.querySelector('input[name="sdt"]').value;
+        var ten = document.querySelector('input[name="ten"]').value;
+        var mucDich = document.querySelector('input[name="mucDich"]').value;
+        var nhiemVu = document.querySelector('input[name="nhiemVu"]').value;
+        var tomTat = document.querySelector('input[name="tomTat"]').value;
+        var createdDate = document.querySelector('input[name="createdDate"]').value;
+        var modifiedDate = document.querySelector('input[name="modifiedDate"]').value;
+
         var bomonCode = document.querySelector('input[name="bomonCode"]').value;
         var tenBoMon = document.querySelector('input[name="tenBoMon"]').value;
 
         var formData = {
-            msgv: msgv,
-            username: username,
-            hoTen: hoTen,
-            gioitinh: gioitinh,
-            email: email,
-            ngaysinh: ngaysinh,
-            sdt: sdt,
+            ten: ten,
+            mucDich: mucDich,
+            nhiemVu: nhiemVu,
+            tomTat: tomTat,
+            modifiedDate: modifiedDate,
+            createdDate: createdDate,
+            
             bomonCode: bomonCode,
             tenBoMon: tenBoMon
         }
-        createGiaoVien(formData);
+        createDeTai(formData);
     }
 }
-function handleDeleteGiaoVien(id){
+function handleDeleteDeTai(id){
     var options = {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json'
         },
     }
-    fetch(GiaoVienApi + '/' + id, options)
+    fetch(DeTaiApi + '/' + id, options)
         .then(function (response) {
             return response.json();
         })
         .then(function () {
-            var bomonItem = document.querySelector('.giaovien-'+id);
+            var bomonItem = document.querySelector('.detai-'+id);
             if(bomonItem){
                 bomonItem.remove();
             }
