@@ -181,7 +181,7 @@
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            BỘ MÔN
+                            NGÔN NGỮ
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped b-t b-light">
@@ -195,20 +195,47 @@
                                         <th style="width:30px;"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                   <tr>
-                                       <td>1</td>
-                                       <td>2</td>
-                                       <td>2</td>
-                                       <td>4</td>
-                                       <td>5</td>
-                                       <td><a href="" class="active" ui-toggle-class=""><i class="fa fa-eye text-success text-active"></i></a>
-                                        <button class="btn"><i class="fa fa-times text-danger text"></i></button></td>
-                                   </tr>
+                                <tbody id="list-ngonngu">
+
                                 </tbody>
                             </table>
                         </div>
-                        <footer class="panel-footer">
+                        <div class="modal fade" id="updatengonngu" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Cập nhật ngôn ngữ</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Tên ngôn ngữ </label>
+                                            <input type="text" name="ten" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Phần trăm</label>
+                                            <input type="text" name="percent" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Created Date</label>
+                                            <input type="text" name="createdDate" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Modified Date</label>
+                                            <input type="text" name="modifiedDate" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="update-ngonngu">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
+                        <!-- <footer class="panel-footer">
                             <div class="row">
                                 <div class="col-sm-7 text-right text-center-xs">
                                     <ul class="pagination pagination-sm m-t-none m-b-none">
@@ -221,7 +248,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </footer>
+                        </footer> -->
                     </div>
                 </div>
             </section>
@@ -230,7 +257,7 @@
 
         <!--main content end-->
     </section>
-    <script src="js/bomon.js"></script>
+    <script src="js/ngonngu.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="js/scripts.js"></script>
