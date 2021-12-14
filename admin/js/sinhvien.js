@@ -30,7 +30,7 @@ function renderSinhVien(DSSinhVien){
                     <td>${SinhVien.sdt}</td>
                     <td>${SinhVien.nienKhoa}</td>
                     <td>${SinhVien.chuyenNganh}</td>
-                    <td><a href="" class="active" ui-toggle-class=""><i class="fa fa-eye text-success text-active"></i></a>
+                    <td><button class="btn"><i class="fa fa-eye text-success text-active"></i></button>
                     <button class="btn" onclick="handleDeleteSinhVien(${SinhVien.id})"><i class="fa fa-times text-danger text"></i></button></td>
                 </tr>`;
     });
@@ -97,3 +97,4 @@ function handleDeleteSinhVien(id){
         }
     })
 }
+
