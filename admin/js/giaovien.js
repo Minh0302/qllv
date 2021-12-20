@@ -6,9 +6,6 @@ function start(){
     getGiaoVien(function (DSGiaoVien){
         renderGiaoVien(DSGiaoVien);
     });
-    getMaBoMon(function (DSMaBoMon){
-        renderMaBoMon(DSMaBoMon);
-    });
     getTenBoMon(function(DSTenBoMon){
         renderTenBoMon(DSTenBoMon);
     });
@@ -46,20 +43,6 @@ function renderGiaoVien(DSGiaoVien){
     listGiaoVien.innerHTML = htmls.join('');
 }
 
-function getMaBoMon(callback){
-    fetch(BoMonApi)
-        .then(function(response){
-            return response.json();
-        })
-        .then(callback)
-}
-function renderMaBoMon(DSMaBoMon){
-    var listMaBoMon = document.querySelector('#list-mabomon');
-    var htmls = DSMaBoMon.map(function (MaBoMon) {
-        return `<option value="${MaBoMon.code}">${MaBoMon.code}</option>`;
-    });
-    listMaBoMon.innerHTML = htmls.join('');
-}
 function getTenBoMon(callback){
     fetch(BoMonApi)
         .then(function(response){
@@ -97,8 +80,7 @@ function handleCreateGiaoVien(){
         var email = document.querySelector('input[name="email"]').value;
         var ngaysinh = document.querySelector('input[name="ngaysinh"]').value;
         var sdt = document.querySelector('input[name="sdt"]').value;
-        var bomonCode = document.querySelector('input[name="bomonCode"]').value;
-        var tenBoMon = document.querySelector('input[name="tenBoMon"]').value;
+        var tenBoMon = document.querySelector('select[name="tenBoMon"]').value;
 
         var formData = {
             msgv: msgv,
@@ -108,10 +90,22 @@ function handleCreateGiaoVien(){
             email: email,
             ngaysinh: ngaysinh,
             sdt: sdt,
-            bomonCode: bomonCode,
             tenBoMon: tenBoMon
         }
-        createGiaoVien(formData);
+        if(msgv != "" && username != "" && hoTen !="" && gioitinh != "" && email != "" && ngaysinh != "" && sdt != "" && tenBoMon != ""){
+            msgv = "";
+            username = "";
+            hoTen = "";
+            email = "";
+            ngaysinh = "";
+            sdt = "";
+            tenBoMon = "";
+            gioitinh = "";
+            createGiaoVien(formData);
+            alert("Thêm thành công!!!");
+        } else {
+        alert("Bạn hãy nhập đầy đủ thông tin");
+        }
     }
 }
 function handleDeleteGiaoVien(id){
@@ -121,6 +115,7 @@ function handleDeleteGiaoVien(id){
             'content-type': 'application/json'
         },
     }
+    if (confirm("Are you sure you want to delete?")) {
     fetch(GiaoVienApi + '/' + id, options)
         .then(function (response) {
             return response.json();
@@ -129,6 +124,8 @@ function handleDeleteGiaoVien(id){
             var bomonItem = document.querySelector('.giaovien-'+id);
             if(bomonItem){
                 bomonItem.remove();
+                alert("Đã xoá thành công!!!");
             }
         })
+    }
 }
