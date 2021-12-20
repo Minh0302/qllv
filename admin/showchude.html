@@ -181,45 +181,59 @@
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            BỘ MÔN
+                            CHỦ ĐỀ
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped b-t b-light">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên chủ đề</th>
-                                        <th>Created Date</th>
+                                        <th>Tên Chủ Đề</th>
+                                        <th>Create Date</th>
                                         <th>Modified Date</th>
                                         <th style="width:30px;"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                   <tr>
-                                       <td>1</td>
-                                       <td>2</td>
-                                       <td>2</td>
-                                       <td>4</td>
-                                       <td><a href="" class="active" ui-toggle-class=""><i class="fa fa-eye text-success text-active"></i></a>
-                                        <button class="btn"><i class="fa fa-times text-danger text"></i></button></td>
-                                   </tr>
+                                <tbody id="list-chude">
+                                   
                                 </tbody>
                             </table>
                         </div>
-                        <footer class="panel-footer">
-                            <div class="row">
-                                <div class="col-sm-7 text-right text-center-xs">
-                                    <ul class="pagination pagination-sm m-t-none m-b-none">
-                                        <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-                                        <li><a href="">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">4</a></li>
-                                        <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </footer>
+                        <div class="modal fade" id="updatechude" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title">Cập nhật chủ đề</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Tên chủ đề </label>
+                                            <input type="text" name="ten" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Phần trăm</label>
+                                            <input type="text" name="percent" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Created Date</label>
+                                            <input type="text" name="createdDate" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Modified Date</label>
+                                            <input type="text" name="modifiedDate" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="update-chude">Save changes</button>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div>
                     </div>
                 </div>
             </section>
@@ -228,7 +242,7 @@
 
         <!--main content end-->
     </section>
-    <script src="js/bomon.js"></script>
+    <script src="js/chude.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="js/scripts.js"></script>
