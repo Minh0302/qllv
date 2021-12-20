@@ -75,7 +75,22 @@ function handleCreateSinhVien(){
             chuyenNganh: chuyenNganh,
             nienKhoa: nienKhoa
         }
-        createSinhVien(formData);
+        if(mssv != "" && username != "" && hoTen != "" && gioitinh != "" && email != "" && ngaysinh != "" && sdt != "" && chuyenNganh != "" && nienKhoa != ""){
+            mssv = "";
+            username = "";
+            hoTen = "";
+            gioitinh = "";
+            email = "";
+            ngaysinh = "";
+            sdt = "";
+            chuyenNganh = "";
+            nienKhoa = "";
+            createSinhVien(formData);
+            alert("Thêm thành công!!!");
+        } else {
+          alert("Bạn hãy nhập đầy đủ thông tin");
+        }
+        
 
     }   
 }
@@ -86,15 +101,18 @@ function handleDeleteSinhVien(id){
             'Content-Type': 'application/json'
         },
     };
-    fetch(SinhVienApi + '/' +id, options)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function () {
-        var sinhVienItem = document.querySelector('.sinhvien-'+id);
-        if(sinhVienItem){
-            sinhVienItem.remove();
-        }
-    })
+    if (confirm("Are you sure you want to delete?")) {
+        fetch(SinhVienApi + '/' +id, options)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function () {
+            var sinhVienItem = document.querySelector('.sinhvien-'+id);
+            if(sinhVienItem){
+                sinhVienItem.remove();
+                alert("Đã xoá thành công!!!");
+            }
+        })
+    }
 }
 
