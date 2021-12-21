@@ -26,19 +26,21 @@ function renderGiaoVien(DSGiaoVien){
     var htmls = DSGiaoVien.map(function (GiaoVien) {
         return `<tr class="giaovien-${GiaoVien.id}">
                     <td>${i++}</td>
-                    <td>${GiaoVien.msgv}</td>
-                    <td>${GiaoVien.username}</td>
-                    <td>${GiaoVien.hoTen}</td>
-                    <td>${GiaoVien.gioitinh}</td>
-                    <td>${GiaoVien.email}</td>
-                    <td>${GiaoVien.ngaysinh}</td>
-                    <td>${GiaoVien.sdt}</td>
-                    <td>${GiaoVien.bomonCode}</td>
-                    <td>${GiaoVien.tenBoMon}</td>
+                    <td class="msgv">${GiaoVien.msgv}</td>
+                    <td class="username">${GiaoVien.username}</td>
+                    <td class="hoTen">${GiaoVien.hoTen}</td>
+                    <td class="gioitinh">${GiaoVien.gioitinh}</td>
+                    <td class="email">${GiaoVien.email}</td>
+                    <td class="ngaysinh">${GiaoVien.ngaysinh}</td>
+                    <td class="sdt">${GiaoVien.sdt}</td>
+                    <td class="bomoncode">${GiaoVien.bomonCode}</td>
+                    <td class="tenBoMon">${GiaoVien.tenBoMon}</td>
+
                     <td>
-                    <a href="" class="active" ui-toggle-class=""><i class="fa fa-eye text-success text-active"></i></a>
+                    <button class="btn" onclick="handleGiaoVien(${GiaoVien.id})"  data-toggle="modal" data-target="#updategiaovien"><i class="fa fa-eye text-success text-active"></i></button>
                     <button class="btn" onclick="handleDeleteGiaoVien(${GiaoVien.id})"><i class="fa fa-times text-danger text"></i></button>
-                </td>`;
+                    </td>
+                </tr>`;
     });
     listGiaoVien.innerHTML = htmls.join('');
 }
@@ -128,4 +130,89 @@ function handleDeleteGiaoVien(id){
             }
         })
     }
+}
+
+function UpdateGiaoVien(id,data,callback){
+    var options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(data)
+    }
+    fetch(GiaoVienApi + "/"+id,options)
+        .then(function(response){
+            return response.json();
+        })
+        .then(callback)
+}
+function handleGiaoVIen(id){
+    var giaovienItem = document.querySelector('.giaovien-'+id);
+    // var getten=chudeItem.querySelector(".ten").innerText;
+    // var getcreatedDate=chudeItem.querySelector(".createdDate").innerText;
+    // var getmodifiedDate=chudeItem.querySelector(".modifiedDate").innerText;
+
+
+    var getmsgv = giaovienItem.querySelector(".msgv").innerText;
+    var getusername = giaovienItem.querySelector(".username").innerText;
+    var gethoTen = giaovienItem.querySelector(".hoTen").innerText;
+    var getgioitinh = giaovienItem.querySelector(".gioitinh").innerText;
+    var getemail = giaovienItem.querySelector(".email").innerText;
+    var getngaysinh = giaovienItem.querySelector(".ngaysinh").innerText;
+    var getsdt = giaovienItem.querySelector(".sdt").innerText;
+    var getTenBoMon = giaovienItem.querySelector(".tenBoMon").innerText;
+
+    // var ten = document.querySelector('input[name="ten"]');
+    // var createdDate = document.querySelector('input[name="createdDate"]');
+    // var modifiedDate = document.querySelector('input[name="modifiedDate"]');
+
+    var msgv = document.querySelector('input[name="msgv"]');
+    var username = document.querySelector('input[name="username"]');
+    var hoTen = document.querySelector('input[name="hoTen"]');
+    var gioitinh = document.querySelector('input[name="gioitinh"]');
+    var email = document.querySelector('input[name="email"]');
+    var ngaysinh = document.querySelector('input[name="ngaysinh"]');
+    var sdt = document.querySelector('input[name="sdt"]');
+    var tenBoMon = document.querySelector('select[name="tenBoMon"]');
+
+    msgv.value=getmsgv;
+    username.value=getusername;
+    hoTen.value=gethoTen;
+    gioitinh.value=getgioitinh;
+    email.value=getemail;
+    ngaysinh.value=getngaysinh;
+    sdt.value=getsdt;
+    tenBoMon.value=getTenBoMon;
+
+    // ten.value=getten;
+
+    // createdDate.value=getcreatedDate;
+    // modifiedDate.value=getmodifiedDate;
+
+    // console.log(getTen);
+    // console.log(getPercent);
+    // console.log(getCreatedDate);
+    // console.log(getModifiedDate);
+    
+    var btnUpdate=document.querySelector("#update-giaovien")
+    btnUpdate.onclick=function(){
+        var formData={
+            msgv: msgv.value,
+            username: username.value,
+            hoTen: hoTen.value,
+            gioitinh: gioitinh.value,
+            email: email.value,
+            ngaysinh: ngaysinh.value,
+            sdt: sdt.value,
+            TenBoMon: tenBoMon.value
+        };
+        // if(ten.value != "" && percent.value !="" && createdDate.value !="" && modifiedDate.value !=""){
+            UpdateGiaoVien(id,formData,function(){
+                getGiaoVien(renderGiaoVien);
+            })
+        // }
+        // else{
+        //     alert("Bạn hãy nhập đầy đủ thông tin");
+        // }
+    } 
 }

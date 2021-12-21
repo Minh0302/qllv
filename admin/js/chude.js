@@ -22,7 +22,6 @@ function renderChuDe(DSChuDe){
         return `<tr class="chude-${ChuDe.id}">
                     <td>${i++}</td>
                     <td class="ten">${ChuDe.ten}</td>
-                    <td class="percent">${ChuDe.percent}</td>
                     <td class="createdDate">${ChuDe.createdDate}</td>
                     <td class="modifiedDate">${ChuDe.modifiedDate}</td>
                     <td>
@@ -60,7 +59,15 @@ function handleCreateChuDe(){
             createdDate: createdDate,
             modifiedDate: modifiedDate
         }
-        createChuDe(formData);
+        if(ten != "" && createdDate !="" && modifiedDate !=""){
+            ten = "";
+            createdDate = "";
+            modifiedDate = "";
+            createChuDe(formData);
+            alert("Thêm thành công!!!");
+        }else{
+            alert("Bạn hãy nhập đầy đủ thông tin");
+        }
 
     }   
 }
@@ -80,9 +87,11 @@ function handleDeleteChuDe(id){
             return response.json();
         })
         .then(function(){
-            getChuDe(function(DSChuDe){
-                renderChuDe(DSChuDe);
-            });
+            var chudeItem = document.querySelector('.chude-'+id);
+            if(chudeItem){
+                chudeItem.remove();
+                alert('Đã xoá thành công!!!');
+            }
         })
 }
 
@@ -103,17 +112,15 @@ function UpdateChuDe(id,data,callback){
 function handleChuDe(id){
     var chudeItem = document.querySelector('.chude-'+id);
     var getten=chudeItem.querySelector(".ten").innerText;
-    var getpercent=chudeItem.querySelector(".percent").innerText;
     var getcreatedDate=chudeItem.querySelector(".createdDate").innerText;
     var getmodifiedDate=chudeItem.querySelector(".modifiedDate").innerText;
 
     var ten = document.querySelector('input[name="ten"]');
-    var percent = document.querySelector('input[name="percent"]');
     var createdDate = document.querySelector('input[name="createdDate"]');
     var modifiedDate = document.querySelector('input[name="modifiedDate"]');
 
     ten.value=getten;
-    percent.value=getpercent;
+
     createdDate.value=getcreatedDate;
     modifiedDate.value=getmodifiedDate;
 
@@ -126,7 +133,6 @@ function handleChuDe(id){
     btnUpdate.onclick=function(){
         var formData={
             ten:ten.value,
-            percent: percent.value,
             createdDate: createdDate.value,
             modifiedDate: modifiedDate.value
         };

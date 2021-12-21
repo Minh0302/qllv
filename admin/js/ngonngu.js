@@ -62,7 +62,16 @@ function handleCreateNgonNgu(){
             createdDate: createdDate,
             modifiedDate: modifiedDate
         }
-        createNgonNgu(formData);
+        if(ten != "" && percent !="" && createdDate !="" && modifiedDate !=""){
+            ten = "";
+            percent = "";
+            createdDate = "";
+            modifiedDate = "";
+            createNgonNgu(formData);
+            alert("Thêm thành công!!!");
+        }else{
+            alert("Bạn hãy nhập đầy đủ thông tin");
+        }
 
     }   
 }
@@ -79,9 +88,11 @@ function handleDeleteNgonNgu(id){
             return response.json();
         })
         .then(function(){
-            getNgonNgu(function(DSNgonNgu){
-                renderNgonNgu(DSNgonNgu);
-            });
+            var ngonnguItem = document.querySelector('.ngonngu-'+id);
+            if(ngonnguItem){
+                ngonnguItem.remove();
+                alert('Đã xoá thành công!!!');
+            }
         })
 }
 
