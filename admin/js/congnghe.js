@@ -61,24 +61,17 @@ function handleCreateCongNghe() {
   createBtnCongNghe.onclick = function () {
     var ten = document.querySelector('input[name="ten"]').value;
     var percent = document.querySelector('input[name="percent"]').value;
-    var createdDate = document.querySelector('input[name="createdDate"]').value;
-    var modifiedDate = document.querySelector(
-      'input[name="modifiedDate"]'
-    ).value;
 
     var formData = {
       ten: ten,
       percent: percent,
-      createdDate: createdDate,
-      modifiedDate: modifiedDate,
     };
-    if (ten != "" && percent != "" && createdDate != "" && modifiedDate != "") {
+    if (ten != "" && percent != "") {
       ten = "";
       percent = "";
-      createdDate = "";
-      modifiedDate = "";
       createCongNghe(formData);
       alert("Thêm thành công!!!");
+      window.location.reload();
     } else {
       alert("Bạn hãy nhập đầy đủ thông tin");
     }
@@ -104,6 +97,7 @@ function handleDeleteCongNghe(id) {
           alert("Đã xoá thành công!!!");
         }
       });
+      window.location.reload();
   }
 }
 function UpdateCongNghe(id, data, callback) {
@@ -124,18 +118,12 @@ function handleCongNghe(id) {
   var congngheItem = document.querySelector(".congnghe-" + id);
   var getTen = congngheItem.querySelector(".ten").innerText;
   var getPercent = congngheItem.querySelector(".percent").innerText;
-  var getCreatedDate = congngheItem.querySelector(".createdDate").innerText;
-  var getModifiedDate = congngheItem.querySelector(".modifiedDate").innerText;
 
   var ten = document.querySelector('input[name="ten"]');
   var percent = document.querySelector('input[name="percent"]');
-  var createdDate = document.querySelector('input[name="createdDate"]');
-  var modifiedDate = document.querySelector('input[name="modifiedDate"]');
 
   ten.value = getTen;
   percent.value = getPercent;
-  createdDate.value = getCreatedDate;
-  modifiedDate.value = getModifiedDate;
 
   // console.log(getTen);
   // console.log(getPercent);
@@ -147,11 +135,10 @@ function handleCongNghe(id) {
     var formData = {
       ten: ten.value,
       percent: percent.value,
-      createdDate: createdDate.value,
-      modifiedDate: modifiedDate.value,
     };
     UpdateCongNghe(id, formData, function () {
       getCongNghe(renderCongNghe);
+      alert("Cập nhật thành công");
     });
   };
 }
