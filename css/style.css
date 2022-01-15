@@ -2,7 +2,9 @@
 GLOBAL STYLE
 *******************************************************************************/
 /* typography */
-
+.giaovien{
+    cursor: pointer;
+}
 .btn-outline-secondary {
   color: #6c757d;
   border-color: #6c757d;
@@ -1375,7 +1377,7 @@ CATEGORY PAGE STYLE
     display: block;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 700;s
+    font-weight: 700;
 }
 
 .tabs-cat .cate-item .fa {

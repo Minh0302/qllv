@@ -181,86 +181,44 @@
                 <div class="table-agile-info">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            GIÁO VIÊN
+                            BỘ MÔN
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped b-t b-light">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Mã GV</th>
+                                        <th>MSSV</th>
                                         <th>Username</th>
-                                        <th>Tên giáo viên</th>
+                                        <th>Họ tên</th>
                                         <th>Giới tính</th>
                                         <th>Email</th>
                                         <th>Ngày Sinh</th>
                                         <th>SĐT</th>
-                                        <th>Mã bộ môn</th>
-                                        <th>Tên Bộ môn</th>
+                                        <th>Niên khoá</th>
+                                        <th>Chuyên ngành</th>
                                         <th style="width:30px;"></th>
                                     </tr>
                                 </thead>
-                                <tbody id="list-giaovien">
+                                <tbody id="list-sinhvien">
+                                   
                                 </tbody>
                             </table>
                         </div>
-                        <div class="modal fade" id="updategiaovien" tabindex="-1" role="dialog"
-                            aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title">Cập nhật giáo viên</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Mã số giáo viên </label>
-                                            <input type="text" name="msgv" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Username </label>
-                                            <input type="text" name="username" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Họ và tên giáo viên </label>
-                                            <input type="text" name="hoTen" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Giới Tính </label>
-                                            <input type="text" name="gioitinh" class="form-control">
-                                        </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Email </label>
-                                            <input type="text" name="email" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Ngày Sinh </label>
-                                            <input type="text" name="ngaysinh" class="form-control">
-                                        
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Số điện thoại </label>
-                                            <input type="text" name="sdt" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Mã Bộ Môn </label>
-                                            <input type="text" name="bomonCode" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Tên bộ môn </label>
-                                            <input type="text" name="tenBoMon" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" id="update-giaovien">Save changes</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div>
-                        
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-7 text-right text-center-xs">
+                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                        <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                                        <li><a href="">1</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                        <li><a href="">4</a></li>
+                                        <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </section>
@@ -269,7 +227,7 @@
 
         <!--main content end-->
     </section>
-    <script src="js/giaovien.js"></script>
+    <script src="js/sinhvien.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="js/scripts.js"></script>
