@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="css/font.css" type="text/css" />
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- //font-awesome icons -->
-    <script src="js/jquery2.0.3.min.js"></script>
+
 </head>
 
 <body>
@@ -174,11 +174,11 @@
             </div>
         </aside>
 
-            <!--sidebar end-->
-            <!--main content start-->
-            <section id="main-content">
-               <section class="wrapper">
-                   <div class="form-w3layouts">
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="form-w3layouts">
                     <!-- page start-->
                     <!-- page start-->
                     <div class="row">
@@ -189,47 +189,61 @@
                                 </header>
                                 <div class="panel-body">
                                     <div class="position-center">
-                                        <form role="form">
+                                        <form role="form" method="POST" enctype="multipart/form">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Tên đề tài</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <label for="tuaDe">Tên đề tài</label>
+                                                <input type="text" name="tuaDe" class="form-control" id="tuaDe">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">MSSV</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <label for="mssv">MSSV</label>
+                                                <input type="text" name="mssv" class="form-control" id="mssv">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Sinh viên thực hiện</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <label for="msgv">MSGV</label>
+                                                <input type="text" name="msgv" class="form-control" id="msgv">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">MSGV</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <label for="file">File đính kèm</label>
+                                                <input type="file" name="file" class="form-control" id="file">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">GV Hướng dẫn</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <label for="moTa">Mô tả</label>
+                                                <input type="text" name="moTa" class="form-control" id="moTa">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">File đính kèm</label>
-                                                <input type="file" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                <label for="tomTat">Tóm tắt</label>
+                                                <input type="text" name="tomTat" class="form-control" id="tomTat">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Mô tả</label>
-                                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                <label for="viTri">Vị trí</label>
+                                                <input type="text" name="viTri" class="form-control" id="viTri">
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputFile">Thuộc chuyên nhành</label>
-                                                <select class="form-control m-bot15">
-                                                    <option>Công nghệ thông tin</option>
-                                                    <option>Hệ thống thông tin</option>
-                                                    <option>Công nghệ phần mềm</option>
-                                                    <option>Khoa học máy tính</option>
-                                                    <option>Mạng máy tính</option>
-                                                    <option>Tin học ứng dụng</option>
+                                                <label for="bomon_id">Bộ Môn</label>
+                                                <select class="form-control m-bot15" id="bomon_id" name="bomon_id">
+
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-info">Submit</button>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Chọn chủ đề</label><br>
+                                                <div id="chude_id" name="chude_id">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Chọn Ngôn ngữ</label><br>
+                                                <div id="ngonngu_id" name="ngonngu_id">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Chọn Công nghệ</label><br>
+                                                <div id="congnghe_id" name="congnghe_id">
+
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-info"
+                                                id="create-tailieu">Submit</button>
                                         </form>
                                     </div>
 
@@ -242,11 +256,52 @@
             </section>
         </section>
     </section>
+    <script src="js/tailieu.js"></script>
+    <script src="js/jquery2.0.3.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="js/scripts.js"></script>
     <!-- <script src="js/jquery.slimscroll.js"></script>
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/jquery.scrollTo.js"></script> -->
+    <script>
+        $('#create-tailieu').click(function (e) {
+            e.preventDefault();
+            var formdata = new FormData();
+            formdata.append('file', $('#file').get(0).files[0]);
+            var luanvan = {
+                tuaDe: $('#tuaDe').val(),
+                moTa: $('#moTa').val(),
+                tomTat: $('#tomTat').val(),
+                viTri: $('#viTri').val(),
+                mssv: $('#mssv').val(),
+                msgv: $('#msgv').val(),
+                bomon_id: $('#bomon_id').val(),
+                chude_id: $.map($('input[name="chude_id"]:checked'), function (chude_id) { return chude_id.value; }),
+                ngonngu_id: $.map($('input[name="ngonngu_id"]:checked'), function (ngonngu_id) { return ngonngu_id.value; }),
+                congnghe_id: $.map($('input[name="congnghe_id"]:checked'), function (congnghe_id) { return congnghe_id.value; }),
+            }
+            data = JSON.stringify(luanvan);
+            formdata.append('luanvan', data);
+            console.log(data);
+            var requestOptions = {
+                method: 'POST',
+                body: formdata,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:8120/api/luanvan/upload", requestOptions)
+                .then(response => response.text())
+                .then(function (response){
+                    alert("Thêm thành công");
+                    window.location.reload();
+                })
+                .catch(function (error){
+                    alert("Thêm thất bại");
+                    window.location.reload();
+                });
+        })
+        
+    </script>
 </body>
+
 </html>
