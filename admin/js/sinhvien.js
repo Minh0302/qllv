@@ -5,6 +5,8 @@ function start() {
         renderSinhVien(DSSinhVien);
     });
     handleCreateSinhVien();
+
+    handleSinhVien(id);
 }
 start();
 
@@ -21,17 +23,19 @@ function renderSinhVien(DSSinhVien){
     var htmls = DSSinhVien.map(function (SinhVien){
         return `<tr class="sinhvien-${SinhVien.id}">
                     <td>${i++}</td>
-                    <td>${SinhVien.mssv}</td>
-                    <td>${SinhVien.username}</td>
-                    <td>${SinhVien.hoTen}</td>
-                    <td>${SinhVien.gioitinh}</td>
-                    <td>${SinhVien.email}</td>
-                    <td>${SinhVien.ngaysinh}</td>
-                    <td>${SinhVien.sdt}</td>
-                    <td>${SinhVien.nienKhoa}</td>
-                    <td>${SinhVien.chuyenNganh}</td>
-                    <td><button class="btn"><i class="fa fa-eye text-success text-active"></i></button>
+                    <td class="mssv">${SinhVien.mssv}</td>
+                    <td class="username">${SinhVien.username}</td>
+                    <td class="hoTen">${SinhVien.hoTen}</td>
+                    <td class="gioitinh">${SinhVien.gioitinh}</td>
+                    <td class="email">${SinhVien.email}</td>
+                    <td class="ngaysinh">${SinhVien.ngaysinh}</td>
+                    <td class="sdt">${SinhVien.sdt}</td>
+                    <td class="chuyenNganh">${SinhVien.chuyenNganh}</td>
+                    <td class="nienKhoa">${SinhVien.nienKhoa}</td>
+                    <td>
+                    <button class="btn" onclick="handleSinhVien(${SinhVien.id})" data-toggle="modal" data-target="#updateSinhVien"><i class="fa fa-eye text-success text-active"></i></button>
                     <button class="btn" onclick="handleDeleteSinhVien(${SinhVien.id})"><i class="fa fa-times text-danger text"></i></button></td>
+                    </td>
                 </tr>`;
     });
     listSinhVien.innerHTML = htmls.join('');
@@ -75,23 +79,24 @@ function handleCreateSinhVien(){
             chuyenNganh: chuyenNganh,
             nienKhoa: nienKhoa
         }
-        if(mssv != "" && username != "" && hoTen != "" && gioitinh != "" && email != "" && ngaysinh != "" && sdt != "" && chuyenNganh != "" && nienKhoa != ""){
-            mssv = "";
-            username = "";
-            hoTen = "";
-            gioitinh = "";
-            email = "";
-            ngaysinh = "";
-            sdt = "";
-            chuyenNganh = "";
-            nienKhoa = "";
+        if(mssv != "" && username !="" && hoTen !="" && gioitinh !="" && email !="" && ngaysinh !="" && sdt !="" && chuyenNganh !="" && nienKhoa !="" ){
+                mssv = "";
+                username = "";
+                hoTen = "";
+                gioitinh = "";
+                email = "";
+                ngaysinh = "";
+                sdt = "";
+                chuyenNganh = "";
+                nienKhoa = "";
+            
             createSinhVien(formData);
             alert("Thêm thành công!!!");
-        } else {
-          alert("Bạn hãy nhập đầy đủ thông tin");
+            window.location.reload();
+        }else{
+            alert("Bạn hãy nhập đầy đủ thông tin");
         }
-        
-
+    
     }   
 }
 function handleDeleteSinhVien(id){
@@ -101,7 +106,7 @@ function handleDeleteSinhVien(id){
             'Content-Type': 'application/json'
         },
     };
-    if (confirm("Are you sure you want to delete?")) {
+    if(confirm('Bạn muốn xóa sinh viên này?')){
         fetch(SinhVienApi + '/' +id, options)
         .then(function (response) {
             return response.json();
@@ -110,9 +115,91 @@ function handleDeleteSinhVien(id){
             var sinhVienItem = document.querySelector('.sinhvien-'+id);
             if(sinhVienItem){
                 sinhVienItem.remove();
-                alert("Đã xoá thành công!!!");
+                alert('Đã xoá thành công!!!');
             }
         })
     }
+    window.location.reload();
 }
+function UpdateSinhVien(id,data,callback){
+    var options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(data)
+    }
+    fetch(SinhVienApi + "/"+id,options)
+        .then(function(response){
+            return response.json();
+        })
+        .then(callback)
+}
+function handleSinhVien(id){
+    var sinhvienItem = document.querySelector('.sinhvien-'+id);
+    var getmssv=sinhvienItem.querySelector(".mssv").innerText;
+    var getusername=sinhvienItem.querySelector(".username").innerText;
+    var gethoTen=sinhvienItem.querySelector(".hoTen").innerText;
+    var getgioitinh=sinhvienItem.querySelector(".gioitinh").innerText;
+    var getemail=sinhvienItem.querySelector(".email").innerText;
+    var getngaysinh=sinhvienItem.querySelector(".ngaysinh").innerText;
+    var getsdt=sinhvienItem.querySelector(".sdt").innerText;
+    var getchuyenNganh=sinhvienItem.querySelector(".chuyenNganh").innerText;
+    var getnienKhoa=sinhvienItem.querySelector(".nienKhoa").innerText;
+
+
+    var mssv = document.querySelector('input[name="mssv"]');
+    var username = document.querySelector('input[name="username"]');
+    var hoTen = document.querySelector('input[name="hoTen"]');
+    var gioitinh = document.querySelector('input[name="gioitinh"]');
+    var email = document.querySelector('input[name="email"]');
+    var ngaysinh = document.querySelector('input[name="ngaysinh"]');
+    var sdt = document.querySelector('input[name="sdt"]');
+    var chuyenNganh = document.querySelector('input[name="chuyenNganh"]');
+    var nienKhoa = document.querySelector('input[name="nienKhoa"]');
+   
+   
+
+    mssv.value=getmssv;
+    username.value=getusername;
+    hoTen.value=gethoTen;
+    gioitinh.value=getgioitinh;
+    email.value=getemail;
+    ngaysinh.value=getngaysinh;
+    sdt.value=getsdt;
+    chuyenNganh.value=getchuyenNganh;
+    nienKhoa.value=getnienKhoa;
+
+    console.log(getmssv);
+    console.log(getusername);
+    console.log(gethoTen);
+    console.log(getemail);
+    console.log(getngaysinh);
+    console.log(getsdt);
+    console.log(getchuyenNganh);
+    console.log(getnienKhoa);
+    
+    var btnUpdate=document.querySelector("#update-sinhvien")
+    btnUpdate.onclick=function(){
+        var formData={
+            mssv:mssv.value,
+            username: username.value,
+            hoTen:hoTen.value,
+            gioitinh:gioitinh.value,
+            email:email.value,
+            ngaysinh:ngaysinh.value,
+            sdt:sdt.value,
+            chuyenNganh:chuyenNganh.value,
+            nienKhoa:nienKhoa.value,
+        
+        };
+        // if(ten.value != "" && percent.value !="" && createdDate.value !="" && modifiedDate.value !=""){
+            UpdateSinhVien(id,formData,function(){
+                getSinhVien(renderSinhVien);
+                alert("Cập nhật thành công");
+            })
+    
+    } 
+}
+
 
