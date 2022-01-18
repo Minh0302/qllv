@@ -1,17 +1,16 @@
 const DeTaiApi = 'http://127.0.0.1:8120/api/detai';
-const BoMonApi = 'http://127.0.0.1:8120/api/bomon';
+const GiaoVienApi = 'http://127.0.0.1:8120/api/giaovien';
 
 function start(){
     getDeTai(function (DSDeTai){
         renderDeTai(DSDeTai);
     });
-    getMaBoMon(function (DSMaBoMon){
-        renderMaBoMon(DSMaBoMon);
+    getGiaoVien(function (DSGiaoVien){
+        renderGiaoVien(DSGiaoVien);
     });
-    getTenBoMon(function(DSTenBoMon){
-        renderTenBoMon(DSTenBoMon);
-    });
+    
     handleCreateDeTai();
+    handleDeTai(id);
 }
 start();
 
@@ -28,47 +27,33 @@ function renderDeTai(DSDeTai){
     var htmls = DSDeTai.map(function (DeTai) {
         return `<tr class="detai-${DeTai.id}">
                     <td>${i++}</td>
-                    <td>${DeTai.ten}</td>
-                    <td>${DeTai.mucDich}</td>
-                    <td>${DeTai.nhiemVu}</td>
-                    <td>${DeTai.tomTat}</td>
-                    <td>${DeTai.modifiedDate}</td>
-                    <td>${DeTai.createdDate}</td>
+                    <td class="ten">${DeTai.ten}</td>
+                    <td class="mucDich">${DeTai.mucDich}</td>
+                    <td class="nhiemVu">${DeTai.nhiemVu}</td>
+                    <td class="tomTat">${DeTai.tomTat}</td>
+                    <td class="idGiaoVien">${DeTai.idGiaoVien}</td>
+                    <td class="tenGiaoVien">${DeTai.tenGiaoVien}</td>
                     <td>
-                    <a href="" class="active" ui-toggle-class=""><i class="fa fa-eye text-success text-active"></i></a>
+                    <button class="btn" onclick="handleDeTai(${DeTai.id})" data-toggle="modal" data-target="#updateDeTai"><i class="fa fa-eye text-success text-active"></i></button>
                     <button class="btn" onclick="handleDeleteDeTai(${DeTai.id})"><i class="fa fa-times text-danger text"></i></button>
                 </td>`;
     });
     listDeTai.innerHTML = htmls.join('');
 }
 
-function getMaBoMon(callback){
-    fetch(BoMonApi)
+function getGiaoVien(callback){
+    fetch(GiaoVienApi)
         .then(function(response){
             return response.json();
         })
         .then(callback)
 }
-function renderMaBoMon(DSMaBoMon){
-    var listMaBoMon = document.querySelector('#list-mabomon');
-    var htmls = DSMaBoMon.map(function (MaBoMon) {
-        return `<option value="${MaBoMon.code}">${MaBoMon.code}</option>`;
+function renderGiaoVien(DSGiaoVien){
+    var listGiaoVien = document.querySelector('#list-GiaoVien');
+    var htmls = DSGiaoVien.map(function (tenGiaoVien) {
+        return `<option selected value="${tenGiaoVien.id}">${tenGiaoVien.hoTen}</option>`;
     });
-    listMaBoMon.innerHTML = htmls.join('');
-}
-function getTenBoMon(callback){
-    fetch(BoMonApi)
-        .then(function(response){
-            return response.json();
-        })
-        .then(callback)
-}
-function renderTenBoMon(DSTenBoMon){
-    var listTenBoMon = document.querySelector('#list-tenbomon');
-    var htmls = DSTenBoMon.map(function (TenBoMon) {
-        return `<option value="${TenBoMon.code}">${TenBoMon.tenBoMon}</option>`;
-    });
-    listTenBoMon.innerHTML = htmls.join('');
+    listGiaoVien.innerHTML = htmls.join('');
 }
 
 function createDeTai(data,callback){
@@ -85,29 +70,35 @@ function createDeTai(data,callback){
 }
 function handleCreateDeTai(){
     var createBtnDeTai = document.querySelector('#create-detai');
-    createBtnGiaoVien.onclick = function(){
+    createBtnDeTai.onclick = function(){
         var ten = document.querySelector('input[name="ten"]').value;
         var mucDich = document.querySelector('input[name="mucDich"]').value;
         var nhiemVu = document.querySelector('input[name="nhiemVu"]').value;
         var tomTat = document.querySelector('input[name="tomTat"]').value;
-        var createdDate = document.querySelector('input[name="createdDate"]').value;
-        var modifiedDate = document.querySelector('input[name="modifiedDate"]').value;
+        var idGiaoVien = document.querySelector('select[name="idGiaoVien"]').value;
 
-        var bomonCode = document.querySelector('input[name="bomonCode"]').value;
-        var tenBoMon = document.querySelector('input[name="tenBoMon"]').value;
 
         var formData = {
             ten: ten,
             mucDich: mucDich,
             nhiemVu: nhiemVu,
             tomTat: tomTat,
-            modifiedDate: modifiedDate,
-            createdDate: createdDate,
-            
-            bomonCode: bomonCode,
-            tenBoMon: tenBoMon
+            idGiaoVien: idGiaoVien
         }
-        createDeTai(formData);
+        if(ten != "" && mucDich !="" && nhiemVu !="" && tomTat !="" && idGiaoVien !="" ){
+            ten = "";
+            mucDich = "";
+            nhiemVu = "";
+            tomTat = "";
+            idGiaoVien = "";
+        
+            createDeTai(formData);
+            alert("Thêm thành công!!!");
+            window.location.reload();
+        }else{
+            alert("Bạn hãy nhập đầy đủ thông tin");
+
+        }
     }
 }
 function handleDeleteDeTai(id){
@@ -116,15 +107,84 @@ function handleDeleteDeTai(id){
         headers: {
             'content-type': 'application/json'
         },
-    }
-    fetch(DeTaiApi + '/' + id, options)
+    };
+    if(confirm('Bạn có muốn xóa đề tài này?')){
+        fetch(DeTaiApi + '/' + id, options)
         .then(function (response) {
             return response.json();
         })
         .then(function () {
-            var bomonItem = document.querySelector('.detai-'+id);
-            if(bomonItem){
-                bomonItem.remove();
+            var detaiItem = document.querySelector('.detai-'+id);
+            if(detaiItem){
+                detaiItem.remove();
+                alert('Đã xoá thành công!!!');
             }
         })
+    }
+    window.location.reload();
 }
+
+function UpdateDeTai(id,data,callback){
+    var options = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(data)
+    }
+    fetch(DeTaiApi + "/"+id,options)
+        .then(function(response){
+            return response.json();
+        })
+        .then(callback)
+}
+function handleDeTai(id){
+    var detaiItem = document.querySelector('.detai-'+id);
+    var getTen=detaiItem.querySelector(".ten").innerText;
+    var getMucDich=detaiItem.querySelector(".mucDich").innerText;
+    var getNhiemVu=detaiItem.querySelector(".nhiemVu").innerText;
+    var getTomTat=detaiItem.querySelector(".tomTat").innerText;
+    var getidGiaoVien=detaiItem.querySelector(".idGiaoVien").innerText;
+
+    //console.log(idGiaoVien);
+
+    var ten = document.querySelector('input[name="ten"]');
+    var mucdich = document.querySelector('input[name="mucDich"]');
+    var nhiemvu = document.querySelector('input[name="nhiemVu"]');
+    var tomtat = document.querySelector('input[name="tomTat"]');
+    var idgiaovien = document.querySelector('select[name="idGiaoVien"]');
+
+
+    ten.value=getTen;
+    mucdich.value=getMucDich;
+    nhiemvu.value=getNhiemVu;
+    tomtat.value=getTomTat;
+    idgiaovien.value=getidGiaoVien;
+
+    console.log(ten.value);
+    console.log(getMucDich);
+    console.log(getNhiemVu);
+    console.log(getTomTat);
+    console.log(getidGiaoVien);
+    
+    var btnUpdate=document.querySelector("#update-detai")
+    btnUpdate.onclick=function(){
+        var formData={
+            ten:ten.value,
+            mucdich: mucdich.value,
+            nhiemvu: nhiemvu.value,
+            tomtat: tomtat.value,
+            idgiaovien: idgiaovien.value
+        
+        };
+        // if(ten.value != "" && percent.value !="" && createdDate.value !="" && modifiedDate.value !=""){
+            console.log(formData);
+            UpdateDeTai(id,formData,function(){
+                getDeTai(renderDeTai);
+                alert("Cập nhật thành công");
+                
+            })
+    
+    } 
+}
+
