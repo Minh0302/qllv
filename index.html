@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" />
     <meta name="author" />
-    <style>
+    <!-- <style>
         .csspicfile {
             height: 15px;
             width: 10px;
         }
-
         .highlight {
             background-color: #fbfb06;
         }
-    </style>
+    </style> -->
     <link href="css/toastr.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/toastr.js"></script>
@@ -41,13 +40,6 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
 
-    <!-- Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-<![endif]-->
     <link rel="shortcut icon" href="img/logo.png">
 </head>
 
@@ -58,11 +50,21 @@
             <div class="container">
                 <ul class="list-inline navbar-text  soc-list hidden-xs">
                 </ul>
-                <ul class="list-inline navbar-text navbar-right">
+                <!-- <ul class="list-inline navbar-text navbar-right">
                     <li id="ulUserBar">
                         <a href="#" data-toggle="modal" data-target="#login"><i class="fa fa-user"></i> Đăng nhập</a>
                     </li>
-                </ul>
+                </ul> -->
+                <ul class="list-inline navbar-text navbar-right">
+                    <li id="ulUserBar" class="dropdown">
+                        <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown"
+                            class="dropdown-toggle" href="#">
+                            <i class="fa fa-user"> B1809606 </i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="">Thông tin cá nhân</a></li>
+                            <li><a href="">Thoát</a></li>
+                        </ul>
             </div>
         </div>
         <!-- Modal login -->
@@ -150,7 +152,7 @@
 
         <!--========== /TOP MENU =========-->
         <section class="sub-banner">
-            <div class="parallax-window" data-parallax="scroll" data-image-src="img/bg-4.jpg">
+            <div class="parallax-window" data-parallax="scroll" data-image-src="">
                 <div class="container">
                     <ol class="breadcrumb">
                         <li><a href="#">Tra cứu tài liệu</a></li>
@@ -160,7 +162,20 @@
                         <div id="form-quick" class="tab-panel active">
                             <div id="form-quick-content" class="form-cn form-quick child">
                                 <div class="form-search row">
-                                    <div class="form-field col-sm-10">
+                                    <div class="form-field field-select col-sm-3">
+                                        <div class="select">
+                                            <div class="select">
+                                                <span>Tìm nhanh</span>
+                                                <!-- <select id="cbSearchValueform-quick1">
+                                                    <option value="all">Giáo viên</option>
+                                                    <option value="title">Công nghệ</option>
+                                                    <option value="author">Ngôn ngữ</option>
+                                                    <option value="subject">Chủ đề</option>
+                                                </select> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-field col-sm-7">
                                         <label><span></span></label>
                                         <input type="text" class="field-input" id="txtSearchValueform-quick1" value="">
                                     </div>
@@ -193,77 +208,87 @@
                                             </h4>
                                         </center>
                                     </div>
-                                    <div class="panel-collapse collapse in" aria-expanded="true" style="">
+                                    <div class="panel-collapse collapse in" aria-expanded="true">
                                         <div class="panel-body">
                                             <ul id="list-bomon" class="widget-ul">
 
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="panel-heading border-category">
+                                        <center>
+                                            <h4 class="panel-title panel-title-adjust">
+                                                Chủ đề
+                                            </h4>
+                                        </center>
+                                    </div>
+                                    <div class="panel-collapse collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            <!-- <ul id="" class="widget-ul">
+                                                <li>
+                                                    <div class="radio-checkbox">
+                                                        <input type="checkbox" name="1" id="1" class="checkbox">
+                                                        <label for="1">Website thương mại</label>
+                                                    </div> 
+                                                </li>
+                                                <li>
+                                                    <div class="radio-checkbox">
+                                                        <input type="checkbox" name="2" id="2" class="checkbox">
+                                                        <label for="2">Hệ thống quản lý</label>
+                                                    </div> 
+                                                </li>
+                                            </ul> -->
+                                            <div class="form-group">
+                                                <div class="col-sm-6 col-md-12">
+                                                    <select id="list-chude" class="form-control">
 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-heading border-category">
+                                        <center>
+                                            <h4 class="panel-title panel-title-adjust">
+                                                Ngôn ngữ
+                                            </h4>
+                                        </center>
+                                    </div>
+                                    <div class="panel-collapse collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-sm-6 col-md-12">
+                                                    <select id="list-ngonngu" class="form-control">
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-heading border-category">
+                                        <center>
+                                            <h4 class="panel-title panel-title-adjust">
+                                                Công nghệ
+                                            </h4>
+                                        </center>
+                                    </div>
+                                    <div class="panel-collapse collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-sm-6 col-md-12">
+                                                    <select id="list-congnghe" class="form-control">
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9" id="list-luanvan">
 
-                        <div class="col-sm-4" style="width: 600;height: 400;">
-                            <div class="card shadow-sm">
-                                <img src="images/no-thumb/a1.png" class="card-img-top" width="100%" height="300">
-
-                                <div class="card-body">
-                                    <h4>Xây dựng mạng xã hội các nhà nghiên cứu lĩnh vực IT sử dụng graphdatabase</h4>
-                                    <center>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a href="details.html" class="btn btn-sm btn-outline-secondary">View</a>
-                                                <a href="" class="btn btn-sm btn-outline-secondary"><i
-                                                        class="fas fa-eye">100</i></a>
-                                            </div>
-                                            <small class="text-muted">9 mins ago</small>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4" style="width: 600;height: 400;">
-                            <div class="card shadow-sm">
-                                <img src="images/no-thumb/a1.png" class="card-img-top" width="100%" height="300">
-
-                                <div class="card-body">
-                                    <h4>Xây dựng mạng xã hội các nhà nghiên cứu lĩnh vực IT sử dụng graphdatabase</h4>
-                                    <center>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a href="details.html" class="btn btn-sm btn-outline-secondary">View</a>
-                                                <a href="" class="btn btn-sm btn-outline-secondary"><i
-                                                        class="fas fa-eye">100</i></a>
-                                            </div>
-                                            <small class="text-muted">9 mins ago</small>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4" style="width: 600;height: 400;">
-                            <div class="card shadow-sm">
-                                <img src="images/no-thumb/a1.png" class="card-img-top" width="100%" height="300">
-
-                                <div class="card-body">
-                                    <h4>Xây dựng mạng xã hội các nhà nghiên cứu lĩnh vực IT sử dụng graphdatabase</h4>
-                                    <center>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                                <a href="details.html" class="btn btn-sm btn-outline-secondary">View</a>
-                                                <a href="" class="btn btn-sm btn-outline-secondary"><i
-                                                        class="fas fa-eye">100</i></a>
-                                            </div>
-                                            <small class="text-muted">9 mins ago</small>
-                                        </div>
-                                    </center>
-                                </div>
-                            </div>
-                        </div>
 
 
                     </div>
@@ -297,7 +322,6 @@
                 </div>
             </div>
         </section>
-        <script type="text/javascript" src="javascripts/category.js"></script>
         <!-- Jquery -->
         <script type="text/javascript" src="js/jquery.min.js"></script>
 
@@ -317,7 +341,7 @@
         <script type="text/javascript" src="js/searchjs.js"></script>
         <script type="text/javascript" src="js/mudim.js"></script>
         <script type="text/javascript" src="javascripts/login.js"></script>
-
+        <script type="text/javascript" src="javascripts/handleLuanVan.js"></script>
     </body>
 
 
